@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:clickable="false"
+    android:divider="#f103061a"
+    android:dividerPadding="@dimen/abc_switch_padding"
+    android:orientation="vertical"
+    android:showDividers="beginning|end">
+
+
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/ColValue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dip"
+            android:layout_marginTop="8dip"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="@+id/ColValue"
+            android:textAppearance="?android:attr/textAppearanceListItem"
+            android:textSize="25sp" />
+
+
+    <!--    <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="6dip"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center|center_vertical"
+            android:gravity="right" />-->
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/ColName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dip"
+        android:layout_weight="1"
+        android:text="@+id/ColName"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="15sp" />
+
+
+    <TextView
+        android:id="@+id/ColDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dip"
+        android:layout_marginTop="8dip"
+        android:layout_weight="1"
+        android:linksClickable="true"
+        android:text="@+id/ColDate"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textSize="12sp" />
+
+
+</LinearLayout>
