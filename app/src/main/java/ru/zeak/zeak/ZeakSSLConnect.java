@@ -349,13 +349,15 @@ public class ZeakSSLConnect {
             Log.d(mainActivity.TAG,"PostExecute:Start");
 
             if (connectedSSL == Boolean.TRUE) {
+                Log.d(mainActivity.TAG,"PostExecute:Start1");
 
                 mainActivity.SiteDataList = ParseJSON(doc.body().text());
                 mainActivity.cooca.putAll(this.cooca);
             }
-
+            Log.d(mainActivity.TAG,"PostExecute:Start2");
             mainActivity.connectedSSL = this.connectedSSL;
             // присваиваем переменные после выполнения действий по подключению в бекграунде
+            Log.d(mainActivity.TAG,"PostExecute:Start3");
             mainActivity.RefreshMainForm();
 
             Log.d(mainActivity.TAG,"PostExecute:END!");

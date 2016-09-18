@@ -15,6 +15,9 @@ import android.widget.Toast;
  * Created by zopyx on 18.09.2016.
  */
 public class SetActivity extends Activity implements OnClickListener {
+
+    private MainActivity mainActivity;
+
     SharedPreferences sPref;
     TextView tvLogin;
     TextView tvPassword;
@@ -22,10 +25,10 @@ public class SetActivity extends Activity implements OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(MainActivity.TAG, "onCreate SetActivity");
+        Log.d(mainActivity.TAG, "onCreate SetActivity");
         setContentView(R.layout.settings);
 
-        Log.d(MainActivity.TAG, "onCreate SetActivity1");
+        Log.d(mainActivity.TAG, "onCreate SetActivity1");
         tvLogin = (TextView) findViewById(R.id.etLoginSettings);
         tvPassword = (TextView) findViewById(R.id.etPasswordSettings);
 
@@ -33,8 +36,8 @@ public class SetActivity extends Activity implements OnClickListener {
         sPref = getSharedPreferences("ZeakPref", MODE_PRIVATE);
 
 
-        tvLogin.setText(sPref.getString(MainActivity.LOGIN_SAVED_TEXT, ""));
-        tvPassword.setText(sPref.getString(MainActivity.PASSWORD_SAVED_TEXT, ""));
+        tvLogin.setText(sPref.getString(mainActivity.LOGIN_SAVED_TEXT, ""));
+        tvPassword.setText(sPref.getString(mainActivity.PASSWORD_SAVED_TEXT, ""));
 
         Button btnLoad = (Button) findViewById(R.id.btnLoadSettings);
         Button btnSave = (Button) findViewById(R.id.btnSaveSettings);
@@ -48,24 +51,24 @@ public class SetActivity extends Activity implements OnClickListener {
     public void onClick(View v) {
 
 
-        Log.d(MainActivity.TAG, "по id определяем кнопку, вызвавшую этот обработчик");
+        Log.d(mainActivity.TAG, "по id определяем кнопку, вызвавшую этот обработчик");
 
         switch (v.getId()) {
             case R.id.btnLoadSettings:
                 // кнопка Load
-                Log.d(MainActivity.TAG, "кнопка Load");
+                Log.d(mainActivity.TAG, "кнопка Load");
                 sPref = getSharedPreferences("ZeakPref", MODE_PRIVATE);
-                tvLogin.setText(sPref.getString(MainActivity.LOGIN_SAVED_TEXT, ""));
-                tvPassword.setText(sPref.getString(MainActivity.PASSWORD_SAVED_TEXT, ""));
+                tvLogin.setText(sPref.getString(mainActivity.LOGIN_SAVED_TEXT, ""));
+                tvPassword.setText(sPref.getString(mainActivity.PASSWORD_SAVED_TEXT, ""));
                 Toast.makeText(this, "Подключение к сайту", Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btnSaveSettings:
                 // кнопка Save
-                Log.d(MainActivity.TAG, "кнопка Save");
+                Log.d(mainActivity.TAG, "кнопка Save");
                 sPref = getSharedPreferences("ZeakPref",MODE_PRIVATE);
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putString(MainActivity.LOGIN_SAVED_TEXT, tvLogin.getText().toString());
-                ed.putString(MainActivity.PASSWORD_SAVED_TEXT, tvPassword.getText().toString());
+                ed.putString(mainActivity.LOGIN_SAVED_TEXT, tvLogin.getText().toString());
+                ed.putString(mainActivity.PASSWORD_SAVED_TEXT, tvPassword.getText().toString());
                 ed.commit();
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
 

@@ -58,10 +58,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String login = "";
     String pass = "";
 
-    //Для сохранения настроек
-    SharedPreferences sPref;
-    public static final String LOGIN_SAVED_TEXT = "login_saved_text";
-    public static final String PASSWORD_SAVED_TEXT = "password_saved_text";
+
 
 
     //Переменная для хранения распарсенного джисона с сайта для функции обновления
@@ -75,6 +72,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public static final String TAG_MERCH = "idmerch_id";
     public static final String TAG_TITLE = "title";
 
+
+    //Для сохранения настроек
+    SharedPreferences sPref;
+    public static final String LOGIN_SAVED_TEXT = "login_saved_text";
+    public static final String PASSWORD_SAVED_TEXT = "password_saved_text";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -112,6 +114,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
+
+    //Грузим настройки
+    public void loadSettings() {
+        Log.d(TAG, "Загрузка настроек из файла");
+        sPref = getSharedPreferences("ZeakPref",MODE_PRIVATE);
+        login = sPref.getString(LOGIN_SAVED_TEXT, "");
+        pass = sPref.getString(PASSWORD_SAVED_TEXT, "");
+        Log.d(TAG, "Загрузка настроек из файла завершена");
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -135,8 +147,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Log.d(TAG, "SetActivity.class");
             Intent intent = new Intent(this, SetActivity.class);
-            //startActivity(intent);
+            startActivity(intent);
             return true;
         }
         if (id == R.id.action_about) {
@@ -234,18 +247,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 // Функция обновления элементов на главной форме асинхрон отработал
     public void RefreshMainForm() {
-
+        Log.d(TAG, "RefreshMainForm: start");
         if (connectedSSL == Boolean.TRUE) {
             mySwipeRefreshLayout.setRefreshing(true);
-
+            Log.d(TAG, "RefreshMainForm: start1");
             ArrayAdapter<Indicator> adapter = new IndicatorAdapter(this);
-
+            Log.d(TAG, "RefreshMainForm: start2");
             adapter.clear();
+            Log.d(TAG, "RefreshMainForm: start2-1"+SiteDataList.size());
            // adapter.notifyDataSetChanged();
 
             for (int i = 0; i < SiteDataList.size(); i++) {
+                Log.d(TAG, "RefreshMainForm: start3");
                 Indicator ginger = new Indicator(SiteDataList.get(i).get(TAG_DIM).toString(), SiteDataList.get(i).get(TAG_TITLE).toString(), SiteDataList.get(i).get(TAG_DATE).toString());
                 adapter.add(ginger);
+                Log.d(TAG, "RefreshMainForm: start4");
             }
 //        Indicator ginger2 = new Indicator("zopa","zopyx","zzz");
 //        adapter.add(ginger2);
@@ -283,13 +299,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
 
-    //Грузим настройки
-    public void loadSettings() {
-        Log.d(TAG, "Загрузка настроек из файла");
-        sPref = getSharedPreferences("ZeakPref",MODE_PRIVATE);
-        login = sPref.getString(LOGIN_SAVED_TEXT, "");
-        pass = sPref.getString(PASSWORD_SAVED_TEXT, "");
-        Log.d(TAG, "Загрузка настроек из файла завершена");
-    }
 }
 
