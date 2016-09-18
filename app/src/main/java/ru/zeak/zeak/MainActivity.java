@@ -1,6 +1,8 @@
 package ru.zeak.zeak;
 
 import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -56,6 +58,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String login = "";
     String pass = "";
 
+    //Для сохранения настроек
+    SharedPreferences sPref;
+    public static final String LOGIN_SAVED_TEXT = "login_saved_text";
+    public static final String PASSWORD_SAVED_TEXT = "password_saved_text";
+
 
     //Переменная для хранения распарсенного джисона с сайта для функции обновления
     ArrayList<HashMap<String, String>> SiteDataList;
@@ -98,6 +105,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         // Находим листвью главной формы и связываем
         listView = (ListView) findViewById(R.id.list);
 
+        // грузим настройки
+        loadSettings();
 
 
     }
@@ -126,6 +135,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, SetActivity.class);
+            //startActivity(intent);
             return true;
         }
         if (id == R.id.action_about) {
@@ -262,13 +273,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
-// переопределяю рефреш от свайпа
+    // переопределяю рефреш от свайпа
     @Override
     public void onRefresh() {
         Log.d(TAG, "кнопка Refresh");
         mySwipeRefreshLayout.setRefreshing(true);
 //        вызываю рефреш формы ментодом свайпа
         GetInfoFromSite();
+    }
+
+
+    //Грузим настройки
+    public void loadSettings() {
+        Log.d(TAG, "Загрузка настроек из файла");
+        sPref = getSharedPreferences("ZeakPref",MODE_PRIVATE);
+        login = sPref.getString(LOGIN_SAVED_TEXT, "");
+        pass = sPref.getString(PASSWORD_SAVED_TEXT, "");
+        Log.d(TAG, "Загрузка настроек из файла завершена");
     }
 }
 
