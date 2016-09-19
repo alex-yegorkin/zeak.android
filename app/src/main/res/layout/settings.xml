@@ -3,36 +3,50 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Login"
+        android:id="@+id/textView1Settings" />
     <EditText
         android:id="@+id/etLoginSettings"
         android:title="Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-
-        <requestFocus></requestFocus>
     </EditText>
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Password"
+        android:id="@+id/textView2Settings" />
     <EditText
         android:id="@+id/etPasswordSettings"
         android:title="Password"
+        android:ems="10"
+        android:inputType="textPassword"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:autoText="false">
-
-        <requestFocus></requestFocus>
     </EditText>
+
+
 
     <LinearLayout
         android:id="@+id/linearLayoutSettings1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:padding="@dimen/abc_control_corner_material"
+        android:weightSum="1"
+        >
 
         <Button
             android:id="@+id/btnSaveSettings"
             android:text="Save"
             android:layout_width="wrap_content"
+            android:weightSum="3"
             android:layout_height="wrap_content">
         </Button>
 
@@ -40,10 +54,12 @@
         <Button
             android:id="@+id/btnLoadSettings"
             android:text="Load"
+            android:weightSum="3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            >
+            android:layout_height="wrap_content">
         </Button>
     </LinearLayout>
+
+
 </LinearLayout>
 

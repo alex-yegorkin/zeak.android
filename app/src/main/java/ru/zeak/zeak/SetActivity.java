@@ -60,8 +60,11 @@ public class SetActivity extends Activity implements OnClickListener {
                 sPref = getSharedPreferences("ZeakPref", MODE_PRIVATE);
                 tvLogin.setText(sPref.getString(mainActivity.LOGIN_SAVED_TEXT, ""));
                 tvPassword.setText(sPref.getString(mainActivity.PASSWORD_SAVED_TEXT, ""));
-                Toast.makeText(this, "Подключение к сайту", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Loaded", Toast.LENGTH_SHORT).show();
+                Log.d(mainActivity.TAG, "кнопка Load нажата");
+
                 break;
+
             case R.id.btnSaveSettings:
                 // кнопка Save
                 Log.d(mainActivity.TAG, "кнопка Save");
@@ -71,6 +74,8 @@ public class SetActivity extends Activity implements OnClickListener {
                 ed.putString(mainActivity.PASSWORD_SAVED_TEXT, tvPassword.getText().toString());
                 ed.commit();
                 Toast.makeText(this, "Saved", Toast.LENGTH_SHORT).show();
+                Log.d(mainActivity.TAG, "кнопка Save нажата");
+                System.exit(0);
 
                 break;
 

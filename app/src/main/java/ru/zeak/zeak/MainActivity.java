@@ -34,6 +34,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public static final String TAG = "ZeakLogs";
 
+    //Логин пароль пользователя
+    String login = "";
+    String pass = "";
 
     // Глобальная переменная места хранение кукки
     Map<String, String> cooca = new HashMap<String, String>();
@@ -49,14 +52,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     String loginURL = "zeak.ru/accounts/login/?next=/";
 
     //Глобальная переменная адреса данных (будет массив)
-    String itemURL = "zeak.ru/t3pio_indicatejson/yegorkin/";
+    String itemURLfirst = "zeak.ru/t3pio_indicatejson/";
+    String itemURL;
 
     //Глобальная переменная браузер-агента
     String useragent = "ZEAK-ANDROID; Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2272.101 Safari/537.36";
 
-    //Логин пароль пользователя
-    String login = "";
-    String pass = "";
+
 
 
 
@@ -121,6 +123,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sPref = getSharedPreferences("ZeakPref",MODE_PRIVATE);
         login = sPref.getString(LOGIN_SAVED_TEXT, "");
         pass = sPref.getString(PASSWORD_SAVED_TEXT, "");
+        itemURL = itemURLfirst+login+"/";
         Log.d(TAG, "Загрузка настроек из файла завершена");
     }
 
@@ -252,16 +255,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mySwipeRefreshLayout.setRefreshing(true);
             Log.d(TAG, "RefreshMainForm: start1");
             ArrayAdapter<Indicator> adapter = new IndicatorAdapter(this);
-            Log.d(TAG, "RefreshMainForm: start2");
+//            Log.d(TAG, "RefreshMainForm: start2");
             adapter.clear();
-            Log.d(TAG, "RefreshMainForm: start2-1"+SiteDataList.size());
+//            Log.d(TAG, "RefreshMainForm: start2-1"+SiteDataList.size());
            // adapter.notifyDataSetChanged();
 
             for (int i = 0; i < SiteDataList.size(); i++) {
-                Log.d(TAG, "RefreshMainForm: start3");
+//                Log.d(TAG, "RefreshMainForm: start3");
                 Indicator ginger = new Indicator(SiteDataList.get(i).get(TAG_DIM).toString(), SiteDataList.get(i).get(TAG_TITLE).toString(), SiteDataList.get(i).get(TAG_DATE).toString());
                 adapter.add(ginger);
-                Log.d(TAG, "RefreshMainForm: start4");
+//                Log.d(TAG, "RefreshMainForm: start4");
             }
 //        Indicator ginger2 = new Indicator("zopa","zopyx","zzz");
 //        adapter.add(ginger2);

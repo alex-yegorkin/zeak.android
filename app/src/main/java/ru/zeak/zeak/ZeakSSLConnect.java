@@ -113,31 +113,37 @@ public class ZeakSSLConnect {
                     // Getting JSON Array node
                     JSONArray todo = jsonObj.getJSONArray(mainActivity.TAG_TODO);
 
-                    // looping through All Students
-                    for (int i = 0; i < todo.length(); i++) {
-                        JSONObject c = todo.getJSONObject(i);
+                    if (todo.length()>0) {
+                        Log.d(mainActivity.TAG,"ParseJSON:todo.length.isEmpty: False");
 
-                        String id = c.getString(mainActivity.TAG_ID);
-                        String datetime = c.getString(mainActivity.TAG_DATE);
-                        String dim = c.getString(mainActivity.TAG_DIM);
-                        String merch = c.getString(mainActivity.TAG_MERCH);
-                        String title = c.getString(mainActivity.TAG_TITLE);
+                        // looping through All Students
+                        for (int i = 0; i < todo.length(); i++) {
+                            JSONObject c = todo.getJSONObject(i);
+
+                            String id = c.getString(mainActivity.TAG_ID);
+                            String datetime = c.getString(mainActivity.TAG_DATE);
+                            String dim = c.getString(mainActivity.TAG_DIM);
+                            String merch = c.getString(mainActivity.TAG_MERCH);
+                            String title = c.getString(mainActivity.TAG_TITLE);
 
 
-                        // tmp hashmap for single student
-                        HashMap<String, String> todos = new HashMap<String, String>();
+                            // tmp hashmap for single student
+                            HashMap<String, String> todos = new HashMap<String, String>();
 
-                        // adding every child node to HashMap key => value
-                        todos.put(mainActivity.TAG_ID, id);
-                        todos.put(mainActivity.TAG_DATE, datetime);
-                        todos.put(mainActivity.TAG_DIM, dim);
-                        todos.put(mainActivity.TAG_MERCH, merch);
-                        todos.put(mainActivity.TAG_TITLE, title);
+                            // adding every child node to HashMap key => value
+                            todos.put(mainActivity.TAG_ID, id);
+                            todos.put(mainActivity.TAG_DATE, datetime);
+                            todos.put(mainActivity.TAG_DIM, dim);
+                            todos.put(mainActivity.TAG_MERCH, merch);
+                            todos.put(mainActivity.TAG_TITLE, title);
 
-                        // adding student to students list
-                        retTaskList.add(todos);
+                            // adding student to students list
+                            retTaskList.add(todos);
+                        }
+
+                        return retTaskList;
                     }
-                    return retTaskList;
+                    else return null;
                 } catch (JSONException e) {
                     e.printStackTrace();
                     return null;
@@ -327,6 +333,9 @@ public class ZeakSSLConnect {
                 //Получить данные из сервиса
                 if (connectedSSL == Boolean.TRUE) {
                     doc = getZeakdata(itemURL);
+                    if (debug) {
+                        Log.d(mainActivity.TAG, "doInBackground:DOC:" + doc);
+                    }
                 }
             }
             else {
@@ -353,6 +362,12 @@ public class ZeakSSLConnect {
 
                 mainActivity.SiteDataList = ParseJSON(doc.body().text());
                 mainActivity.cooca.putAll(this.cooca);
+
+                if (mainActivity.SiteDataList == null) {
+                    Log.d(mainActivity.TAG,"PostExecute:Start2-1: ZOPA!!!");
+                    this.connectedSSL = Boolean.FALSE;
+                }
+
             }
             Log.d(mainActivity.TAG,"PostExecute:Start2");
             mainActivity.connectedSSL = this.connectedSSL;
